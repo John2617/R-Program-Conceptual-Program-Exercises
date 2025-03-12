@@ -1,0 +1,25 @@
+# Defining the scores for each method
+method_A <- c(80, 85, 88, 92, 95)
+method_B <- c(75, 78, 82, 87, 90)
+method_C <- c(70, 72, 75, 80, 85)
+
+# Creating the data frame
+data <- data.frame(
+  method = factor(rep(c("A", "B", "C"), each = 5)),
+  score = c(method_A, method_B, method_C)
+)
+
+# Display the structure of the data
+str(data)
+
+# Performing ANOVA
+anova_result <- aov(score ~ method, data = data)
+
+# Displaying the summary of ANOVA
+summary(anova_result)
+
+# Performing Tukey's HSD test
+tukey_result <- TukeyHSD(anova_result)
+
+# Printing the Tukey's HSD results
+print(tukey_result)
