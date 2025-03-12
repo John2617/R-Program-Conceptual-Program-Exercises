@@ -1,0 +1,16 @@
+install.packages("forecast")
+library(forecast)
+
+data <- read.csv("C:/R/min_temp-data.csv")
+data$date <- as.Date(data$date)
+
+plot(data$date, data$min_temperature, type = "l",
+     xlab = "Date", ylab = "Minimum Temp",
+     main = "Time Series Plot")
+
+arima_model <- auto.arima(data$min_temperature)
+summary(arima_model)
+
+future_forecast <- forecast(arima_model, h = 30)
+
+plot(future_forecast, main = "Forecasted Minimum Temperature")
